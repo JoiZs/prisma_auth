@@ -76,7 +76,6 @@ authRoute.post("/login", async (req, res) => {
     httpOnly: true,
     sameSite: "none",
     secure: true,
-    domain: "prismaauth.netlify.app",
   });
   res.cookie("rftk_id", refToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
