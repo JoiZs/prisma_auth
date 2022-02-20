@@ -192,7 +192,7 @@ authRoute.post("/forgetpassword", async (req, res) => {
 
   const sendRestPwMail = await sendMail(
     email,
-    `<a href="http://localhost:3000/restpw/${userExist.id}">Reset Password</a>`
+    `<a href="${process.env.CLIENT_URL}/restpw/${userExist.id}">Reset Password</a>`
   );
 
   return res.json({
