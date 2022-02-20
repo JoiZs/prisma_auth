@@ -71,10 +71,15 @@ authRoute.post("/login", async (req, res) => {
     "1y"
   );
 
-  res.cookie("actk_id", accToken, { maxAge: 1000 * 60 * 3, httpOnly: true });
+  res.cookie("actk_id", accToken, {
+    maxAge: 1000 * 60 * 3,
+    httpOnly: true,
+    sameSite: "lax",
+  });
   res.cookie("rftk_id", refToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
     httpOnly: true,
+    sameSite: "lax",
   });
 
   return res.json({
@@ -177,7 +182,11 @@ authRoute.post("/forgetpassword", async (req, res) => {
 
   const token = createToken({ id: v4() }, process.env.ML_SECT!, "1h");
 
-  res.cookie("rpm_id", token, { httpOnly: true, maxAge: 1000 * 60 * 60 });
+  res.cookie("rpm_id", token, {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60,
+    sameSite: "lax",
+  });
 
   const sendRestPwMail = await sendMail(
     email,
@@ -216,7 +225,7 @@ authRoute.post("/resetpassword", validRtPW, async (req, res) => {
       password: newPassword,
     },
   });
-  res.cookie("rpm_id", "", { httpOnly: true, maxAge: 0 });
+  res.cookie("rpm_id", "", { httpOnly: true, maxAge: 0, sameSite: "lax" });
 
   return res.json({
     data: {
@@ -226,8 +235,12 @@ authRoute.post("/resetpassword", validRtPW, async (req, res) => {
 });
 
 authRoute.post("/logout", isUser, (req, res) => {
-  res.cookie("actk_id", "", { maxAge: 0, httpOnly: true });
-  res.cookie("rftk_id", "", { maxAge: 0, httpOnly: true });
+  res.cookie("actk_id", "", { maxAge: 0, httpOnly: true, sameSite: "lax" });
+  res.cookie("rftk_id", "", {
+    maxAge: 0,
+    httpOnly: true,
+    sameSite: "lax",
+  });
   return res.json({
     data: {
       message: "Successfully Logout",
