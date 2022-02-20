@@ -1,7 +1,6 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Loading from "./components/loading";
 import "./index.css";
 import App from "./App"
 import Register from "./components/register"
