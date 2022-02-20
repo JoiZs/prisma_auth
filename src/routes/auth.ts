@@ -74,12 +74,12 @@ authRoute.post("/login", async (req, res) => {
   res.cookie("actk_id", accToken, {
     maxAge: 1000 * 60 * 3,
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "none",
   });
   res.cookie("rftk_id", refToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "none",
   });
 
   return res.json({

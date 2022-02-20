@@ -15,6 +15,7 @@ async function init() {
     cors({
       credentials: true,
       origin: process.env.CLIENT_URL,
+      
     })
   );
   app.use(cookieParser());
