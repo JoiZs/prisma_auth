@@ -225,6 +225,7 @@ authRoute.post("/resetpassword", validRtPW, async (req, res) => {
     },
     data: {
       password: newPassword,
+      updated_at: new Date().toISOString(),
     },
   });
   res.cookie("rpm_id", "", { httpOnly: true, maxAge: 0, sameSite: "none" });
